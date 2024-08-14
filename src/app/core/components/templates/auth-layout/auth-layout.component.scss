@@ -1,0 +1,29 @@
+.auth-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(239, 242, 255);
+    border-radius: 24px;
+    width: 60%;
+    height: 60%;
+    overflow: hidden;
+}
+
+.auth-container .left-side,
+.auth-container .rigth-side {
+    width: 100%;
+    padding: 24px 0;
+}
+
+.auth-container .left-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/assets/images/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.auth-container .rigth-side {
+    padding: 72px 24px;
+}

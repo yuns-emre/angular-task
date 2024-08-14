@@ -1,0 +1,26 @@
+.organism-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+
+    app-button {
+        margin-top: 24px;
+    }
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.info {
+    margin: 4px 0;
+}
+
+.link-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}

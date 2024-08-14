@@ -1,0 +1,13 @@
+<label class="title">Welcome!</label>
+<p class="info">Sınırsız veri ve bilgiye erişim elde etmek için giriş yapın</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="organism-form">
+    <app-form-group label="Email" type="email" placeholder="Enter your email"
+        [control]="loginForm.controls['email']"></app-form-group>
+    <app-form-group label="Password" type="password" placeholder="Enter your password"
+        [control]="loginForm.controls['password']"></app-form-group>
+    <app-button label="Login"></app-button>
+    <div class="link-container">
+        <p>Don't have an account?</p>
+        <app-link route="/auth/register">Register</app-link>
+    </div>
+</form>

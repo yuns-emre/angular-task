@@ -1,0 +1,14 @@
+<label class="title">Kayıt Ol</label>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="organism-form">
+    <app-form-group label="Email" type="email" placeholder="Enter your email"
+        [control]="registerForm.controls['email']"></app-form-group>
+    <app-form-group label="Password" type="password" placeholder="Enter your password"
+        [control]="registerForm.controls['password']"></app-form-group>
+    <app-form-group label="Confirm Password" type="password" placeholder="Confirm your password"
+        [control]="registerForm.controls['confirmPassword']"></app-form-group>
+    <app-button label="Register"></app-button>
+    <div class="link-container">
+        <p>Already have an account?</p>
+        <app-link route="/auth/login">Login</app-link>
+    </div>
+</form>
