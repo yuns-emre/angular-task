@@ -28,4 +28,20 @@ body {
     border: none;
 }
 
+.social-media-icons {
+    background: rgb(116, 75, 252);
+    border-radius: 2px;
+    color: white;
+    width: 18px;
+    height: 18px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

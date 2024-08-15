@@ -1,0 +1,16 @@
+.org-header {
+  display: flex;
+  align-items: center;
+  padding: 32px 102px;
+
+  app-social-medias {
+    display: flex;
+    gap: 8px;
+  }
+
+  app-header-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

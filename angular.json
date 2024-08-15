@@ -40,9 +40,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "../angular-task/node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           },
           "configurations": {
             "production": {
@@ -111,9 +113,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/font-awesome/css/font-awesome.min.css"
             ],
-            "scripts": []
+            "scripts": [
+            ]
           }
         }
       }
