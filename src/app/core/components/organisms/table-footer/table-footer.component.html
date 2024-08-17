@@ -1,4 +1,5 @@
 <div class="org-table-footer">
-    <app-table-row-number></app-table-row-number>
-    <app-atom-pagination></app-atom-pagination>
+    <app-table-row-number [title]="'Show:'" [inputValue]="tableData.length"
+        class="row-number-container"></app-table-row-number>
+    <app-atom-pagination [totalPage]="tableData.length"></app-atom-pagination>
 </div>

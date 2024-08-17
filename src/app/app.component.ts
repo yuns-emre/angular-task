@@ -8,7 +8,10 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FontAwesomeModule],
+  imports: [
+    RouterOutlet, 
+    FontAwesomeModule,
+  ],
   template: `
     <router-outlet >
     <router-outlet />

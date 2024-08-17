@@ -1,1 +1,42 @@
-Table Data
+<div class="data-table-container">
+    <table [class]="className" matSort (matSortChange)="sortData($event)">
+        <tr>
+            <ng-container *ngFor="let item of titles">
+                <th class="table-title" [mat-sort-header]="item">
+                    {{item}}
+                </th>
+            </ng-container>
+            <th class="btn-container">
+
+            </th>
+        </tr>
+        <tr *ngFor="let item of sortedData">
+            <td>
+                {{item.link}}
+            </td>
+            <td>
+                {{item.name | capitalize}}
+            </td>
+            <td>
+                {{item.desc}}
+            </td>
+            <td class="btn-container">
+                <button mat-fab extended class="edit-btn" (click)="edit(item)">
+                    <mat-icon>edit</mat-icon>
+                    Düzenle
+                </button>
+
+                <button mat-fab extended class="delete-btn" (click)="remove(item)">
+                    <mat-icon>delete</mat-icon>
+                    Sil
+                </button>
+            </td>
+        </tr>
+
+        <tr *ngFor="let item of emptyData">
+            <td *ngFor="let item of [1,1,1,1]">
+                <p></p>
+            </td>
+        </tr>
+    </table>
+</div>

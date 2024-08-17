@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TableRowNumberComponent } from "../../molecules/table-row-number/table-row-number.component";
 import { AtomPaginationComponent } from "../../atoms/atom-pagination/atom-pagination.component";
 
@@ -10,5 +10,5 @@ import { AtomPaginationComponent } from "../../atoms/atom-pagination/atom-pagina
   imports: [TableRowNumberComponent, AtomPaginationComponent],
 })
 export class TableFooterComponent {
-
+  @Input() tableData: any;
 }

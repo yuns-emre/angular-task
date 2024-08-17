@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <img [src]="src" alt="Rast Mobile" width="200"/>
+    <img [src]="src" alt="Rast Mobile" width="100"/>
   `,
   styles: ``
 })

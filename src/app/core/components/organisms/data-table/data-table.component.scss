@@ -1,0 +1,141 @@
+.data-table-container {
+  table {
+    width: 100%;
+    border: 1px solid rgba(234, 234, 234, 1);
+    border-radius: 8px;
+    overflow: hidden;
+
+
+    tr:nth-child(2) {
+      box-shadow: none !important;
+    }
+
+    tr {
+      display: flex;
+      width: 100%;
+
+      th:last-child,
+      td:last-child {
+        border-right: none !important;
+      }
+
+      th {
+        font-size: 16px;
+        font-weight: 500;
+        text-align: start;
+        padding: 24px;
+        background: white;
+        width: 100%;
+        border-right: 1px solid rgba(196, 206, 229, 1);
+        border-bottom: 1px solid rgba(196, 206, 229, 1);
+      }
+
+      td {
+        font-size: 14px;
+        font-weight: 400;
+        text-align: start;
+        padding: 12px 12px 12px 24px;
+        width: 100%;
+        border-right: 1px solid rgb(196, 206, 229);
+        display: flex;
+        align-items: center;
+        word-break: break-all;
+      }
+
+      .btn-container {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        .edit-btn,
+        .delete-btn {
+          padding: 8px 16px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          color: white;
+          box-shadow: none;
+
+          mat-icon {
+            margin: 0;
+            font-size: 24px;
+            color: white;
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        .edit-btn {
+          background-color: rgb(221, 176, 17);
+        }
+
+        .delete-btn {
+          background-color: rgb(233, 52, 52);
+        }
+      }
+    }
+
+  }
+
+  tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.71);
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.11);
+  }
+
+}
+
+::ng-deep .mat-sort-header-arrow[style] {
+
+  // Hide default arrow stem
+  .mat-sort-header-stem {
+    display: none;
+  }
+
+  .mat-sort-header-indicator {
+    opacity: 1;
+    color: black;
+    font-weight: bold;
+
+    // Hide default arrow as its composed of left, right and middle
+    .mat-sort-header-pointer-left,
+    .mat-sort-header-pointer-right,
+    .mat-sort-header-pointer-middle {
+      display: none;
+    }
+  }
+}
+
+// My custom ascending arrow
+[aria-sort='ascending'] {
+  ::ng-deep .mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        transform: rotate(-90deg);
+        content: "\027A1";
+        top: -18px;
+        position: absolute;
+        top: -0em;
+        color: rgba(116, 75, 252, 1);
+        font-size: 20px;
+        line-height: 10px;
+      }
+    }
+  }
+}
+
+// My custom descending arrow
+[aria-sort='descending'] {
+  ::ng-deep .mat-sort-header-arrow {
+    .mat-sort-header-indicator {
+      &::before {
+        transform: rotate(90deg);
+        content: "\027A1";
+        top: -18px;
+        position: absolute;
+        color: rgb(192, 184, 220);
+        font-size: 20px;
+      }
+    }
+  }
+}

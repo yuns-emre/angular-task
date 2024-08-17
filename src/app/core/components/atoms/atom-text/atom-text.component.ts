@@ -8,7 +8,13 @@ import { Component, Input } from '@angular/core';
   template: `
     <p [ngClass]="textClass">{{ textLabel }}</p>
   `,
-  styles: ``
+  styles: `
+    .row-number-title{
+      color:rgba(116, 75, 252, 1);
+      font-size:16px;
+      font-weight:500;
+    }
+  `
 })
 export class AtomTextComponent {
   @Input() textClass: string = '';

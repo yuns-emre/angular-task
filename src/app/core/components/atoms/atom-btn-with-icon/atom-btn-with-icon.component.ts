@@ -18,7 +18,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     .search-btn{
       background: rgb(116, 75, 252);
       border:none;
-      height: 56px;
+      height: 48px;
       aspect-ratio: 1 / 1;
       border-radius: 0 32px 32px 0;
       display: flex;

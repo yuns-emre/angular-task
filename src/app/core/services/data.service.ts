@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { LocalStorageService } from './local-storage.service';
+import { SocialMediaLinkModel } from '../models/social-media-link';
+import { ResponseModel } from '../models/response';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  constructor() { }
+  constructor(
+    private localStorage: LocalStorageService,
+  ) { }
 
   headers = [
     {
@@ -49,6 +54,29 @@ export class DataService {
     },
   ];
 
+  userSocialMediaLink = [
+    {
+      uid: "yunus@gmail.com",
+      socialMedia: [
+        {
+          name: "Instagram",
+          desc: "We'll help you to finish your development project successfully.",
+          link: "instagram.com/mobilerast/",
+        },
+        {
+          name: "linkedin",
+          desc: "Hire vetted developers from Rast Mobile to scale up your tech projects.",
+          link: "tr.linkedin.com/company/rastmobile",
+        },
+        {
+          name: "Behance",
+          desc: "Software Development Agency Rast Mobile Information Technology Ltd.",
+          link: "behance.net/rastmobile",
+        },
+      ]
+    }
+  ];
+
 
   getAllHeaderItems() {
     return this.headers;
@@ -56,5 +84,21 @@ export class DataService {
 
   getAllSocialMediaItems() {
     return this.socialMedia;
+  }
+
+  getAllSocialMediaLinks() {
+    const mail = this.localStorage.getItem("mail");
+
+    return this.userSocialMediaLink.find(item => item.uid == mail);
+  }
+
+  addNewLink(data: SocialMediaLinkModel) {
+    const model = new ResponseModel();
+    const mail = this.localStorage.getItem("mail");
+    this.userSocialMediaLink.find(item => item.uid == mail)?.socialMedia.push(data);
+
+    model.message = "İşleminiz Başarıyla Tamamlanmıştır...";
+    model.success = true;
+    return model;
   }
 }

@@ -11,8 +11,8 @@ import { InputComponent } from "../../atoms/input/input.component";
   ],
   template: `
   <div class="form-group">
-    <label class="input-label">{{ label }}</label>
-    <app-input [type]="type" [placeholder]="placeholder" [control]="control" className="form-control" class="input-component"></app-input>
+    <label [class]="classNameForLabel">{{ label }}</label>
+    <app-input [type]="type" [placeholder]="placeholder" [control]="control" className="form-control" class="input-component" [ngModelData]="modelData"></app-input>
   </div>
   `,
   styles: `
@@ -23,8 +23,13 @@ import { InputComponent } from "../../atoms/input/input.component";
     }
 
     .input-label{
-      font-size:24px;
+      font-size:16px;
       font-weight: 500;
+    }
+
+    .modal-input-label{
+      font-size:14px;
+      font-weight: 400;
     }
   `
 })
@@ -33,4 +38,6 @@ export class FormGroupComponent {
   @Input() type: string = 'text';
   @Input() placeholder: string = '';
   @Input() control: FormControl = new FormControl();
+  @Input() classNameForLabel: string = 'input-label';
+  @Input() modelData: any;
 }

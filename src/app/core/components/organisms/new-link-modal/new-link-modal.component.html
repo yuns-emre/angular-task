@@ -1,0 +1,26 @@
+<div class="new-link-modal">
+    <mat-icon aria-hidden="false" fontIcon="close" mat-button mat-dialog-close></mat-icon>
+    <form [formGroup]="newLinkForm" class="organism-form">
+        <app-form-group label="Sosyal Medya Linki" type="text" placeholder="" [control]="newLinkForm.controls['link']"
+            [modelData]="this.newLinkForm.get('link')?.value" [classNameForLabel]="'modal-input-label'">
+            <input formControlName="link" appSocialMediaLinkValidator>
+
+        </app-form-group>
+        <div *ngIf="newLinkForm.get('link')?.hasError('invalidSocialMediaLink') && newLinkForm.get('link')?.touched"
+            style="color: red;">
+            Geçerli bir sosyal medya linki giriniz.
+        </div>
+
+        <app-form-group label="Sosyal Medya Adı" type="text" placeholder="" [control]="newLinkForm.controls['name']"
+            [modelData]="this.newLinkForm.get('name')?.value"
+            [classNameForLabel]="'modal-input-label'"></app-form-group>
+        <app-form-group label="Açıklama" type="text" placeholder="" [control]="newLinkForm.controls['desc']"
+            [modelData]="this.newLinkForm.get('desc')?.value"
+            [classNameForLabel]="'modal-input-label'"></app-form-group>
+
+        <div class=" btn-container">
+            <app-button label="Vazgeç" [className]="'modal-cancel-btn'" (click)="cancel()"></app-button>
+            <app-button label="Kaydet" [className]="'modal-save-btn'" (click)="onSubmit()"></app-button>
+        </div>
+    </form>
+</div>
