@@ -38,12 +38,10 @@ export class LoginFormComponent {
 
   async onSubmit() {
     if (this.loginForm.valid) {
-      console.log("Login Value:", this.loginForm.value);
       const res = await this.authService.login(
         this.loginForm.value.email,
         this.loginForm.value.password,
       );
-      console.log("res:", res);
 
       if (res.success) {
         this.router.navigate(['/home']);
@@ -58,7 +56,13 @@ export class LoginFormComponent {
       }
 
     } else {
-      console.log("Form is invalid!!!");
+      this.toastr.error(
+        'Form is invalid',
+        'Dikkat!',
+        {
+          positionClass: "toast-bottom-right"
+        }
+      );;
     }
   }
 }

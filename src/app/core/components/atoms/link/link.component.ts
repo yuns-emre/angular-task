@@ -41,8 +41,4 @@ export class TextBtnComponent {
 
   constructor() {
   }
-
-  // ngOnInit(): void {
-  //   console.log(this.route.indexOf("https://"));
-  // }
 }

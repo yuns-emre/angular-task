@@ -55,10 +55,10 @@ export class TableRowNumberComponent {
   @Input() inputValue: any;
 
   increase() {
-    console.log('artış');
+    console.log('Row Increase Btn');
   }
 
   decrease() {
-    console.log('azalış');
+    console.log('Row Decrease Btn');
   }
 }

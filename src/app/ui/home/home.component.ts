@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
   }
 
   process(args: any) {
-    console.log("Process:", args);
     if (args.message == "edit") {
       this.editSocialLink(args.data);
     } else if (args.message == "delete") {
@@ -75,11 +74,11 @@ export class HomeComponent implements OnInit {
 
   callback(args: any) {
     this.isLoading = true;
-    console.log("filterdata:", args);
+
     this.filterdata = this.socialMediaLinks.filter(item =>
       item.name.toLocaleLowerCase().includes(args.toLocaleLowerCase()) == true
     );
-    console.log("filterdata:", this.filterdata);
+
     setTimeout(() => {
       this.isLoading = false;
     }, 300);
@@ -87,13 +86,11 @@ export class HomeComponent implements OnInit {
   }
 
   async editSocialLink(data: SocialMediaLinkModel) {
-    console.log("Data Edit Link:", data);
     await this.dataService.updateSocialMediaLink(data.id ?? '', data);
     await this.getAllSocialMediaLinks();
   }
 
   async removeSocialLink(data: SocialMediaLinkModel) {
-    console.log("Data RemoveLink:", data);
     await this.dataService.deleteSocialMediaLink(data.id ?? '');
     await this.getAllSocialMediaLinks();
   }

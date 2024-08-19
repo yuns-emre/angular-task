@@ -94,7 +94,7 @@ export class DataService {
         }
         links.push(data as SocialMediaLinkModel);
       });
-      console.log("links:", links);
+
       return links;
     } catch (error) {
       console.error("Error getting documents: ", error);
@@ -114,7 +114,6 @@ export class DataService {
 
       const docRef = await addDoc(collection(this.firestore, 'social-media-links'), linkData);
 
-      console.log('Document written with ID:', docRef.id);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -127,7 +126,6 @@ export class DataService {
       }
       const docRef = doc(this.firestore, 'social-media-links', id);
       await deleteDoc(docRef);
-      console.log('Document successfully deleted!');
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
@@ -148,7 +146,6 @@ export class DataService {
       // Belgeyi güncelle
       await updateDoc(docRef, updatedData);
 
-      console.log('Document successfully updated!');
     } catch (error) {
       console.error("Error updating document: ", error);
     }

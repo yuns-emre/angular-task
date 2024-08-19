@@ -23,7 +23,6 @@ export class UserService {
         if (docSnap.exists()) {
           return docSnap.data() as User;
         } else {
-          console.log("No such document!");
           return undefined;
         }
       })
@@ -39,7 +38,6 @@ export class UserService {
         await setDoc(userDocRef, {
           ...userData
         });
-        console.log('User added to Firestore');
       } catch (error) {
         console.error('Error adding user to Firestore:', error);
       }

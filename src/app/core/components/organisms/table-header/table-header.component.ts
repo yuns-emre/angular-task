@@ -24,7 +24,6 @@ export class TableHeaderComponent {
   ) { }
 
   newLink() {
-    console.log("new link");
     const dialogRef = this.dialog.open(NewLinkModalComponent);
 
     dialogRef.afterClosed().subscribe((result) => {

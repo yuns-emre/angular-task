@@ -30,6 +30,5 @@ export class SocialMediasComponent {
 
   getAllSocialMediaItems() {
     this.socialMediaItems = this.dataService.getAllSocialMediaItems();
-    console.log("İtems:" + this.socialMediaItems[0].title);
   }
 }

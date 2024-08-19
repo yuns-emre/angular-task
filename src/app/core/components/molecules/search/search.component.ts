@@ -46,7 +46,6 @@ export class SearchComponent {
   }
 
   search() {
-    console.log("send data: " + this.searchText);
     this.callback.emit(this.searchText);
   }
 }

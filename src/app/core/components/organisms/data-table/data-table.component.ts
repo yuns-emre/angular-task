@@ -38,7 +38,6 @@ export class DataTableComponent implements OnInit {
   ngOnInit(): void {
     this.sortedData = this.tableData;
     this.emptyData = Array(10 - this.sortedData.length).fill(null);
-    console.log("sortedData", this.sortedData);
   }
 
   sortData(sort: Sort) {
@@ -61,18 +60,14 @@ export class DataTableComponent implements OnInit {
           return 0;
       }
     });
-
-    console.log(this.sortedData);
   }
 
   edit(value: SocialMediaLinkModel) {
-    console.log("Value For Edit:", value);
     const dialogRef = this.dialog.open(NewLinkModalComponent, {
       data: value,
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog result Edit:', result);
       if (result.success == true) {
         value.link = result.data.link;
         value.desc = result.data.desc;
@@ -93,8 +88,6 @@ export class DataTableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-
       if (result == true) {
         this.callback.emit({ message: "delete", data: value })
       }

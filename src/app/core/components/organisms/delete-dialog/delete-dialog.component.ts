@@ -36,7 +36,6 @@ export class DeleteDialogComponent {
   constructor(
     private dialogRef: MatDialogRef<DeleteDialogComponent>,
   ) {
-    console.log(this.data);
   }
 
   cancel() {

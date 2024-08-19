@@ -31,12 +31,11 @@ export class AuthService {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, mail, password);
       this.localStroge.setItem("uid", userCredential.user.uid);
-      console.log("User Crendential:", userCredential);
+
       model.success = true;
       model.message = "Kullanıcı oluşturuldu."
     }
     catch (e) {
-      console.log("e:", e);
       model.success = false;
       model.message = "Kullanıcı oluşturulmadı."
     }

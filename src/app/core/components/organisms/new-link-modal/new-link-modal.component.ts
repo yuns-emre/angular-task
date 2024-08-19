@@ -74,11 +74,6 @@ export class NewLinkModalComponent {
       });
     } else {
       //Add Form
-      console.log({
-        success: true,
-        isEdit: this.isUpdateForm,
-        data: this.newLinkForm.value,
-      });
       this.dialogRef.close({
         success: true,
         isEdit: this.isUpdateForm,
@@ -88,7 +83,6 @@ export class NewLinkModalComponent {
   }
 
   cancel() {
-    console.log("cancel");
     this.dialogRef.close({
       success: false,
       data: {},
