@@ -9,6 +9,8 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { provideMessaging, getMessaging } from '@angular/fire/messaging';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideToastr } from 'ngx-toastr';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,7 +21,9 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
-    provideMessaging(() => getMessaging())
+    provideMessaging(() => getMessaging()),
+    provideAnimations(), // required animations providers
+    provideToastr(),
   ]
 
 

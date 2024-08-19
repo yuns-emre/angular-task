@@ -6,8 +6,8 @@
 }
 
 .title {
-    font-size: 24px;
-    font-weight: 800;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .link-container {
@@ -15,4 +15,10 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+
+    p,
+    app-link {
+        margin: 0;
+        font-size: 12px;
+    }
 }

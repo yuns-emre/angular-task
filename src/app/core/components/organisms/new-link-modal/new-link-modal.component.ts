@@ -1,5 +1,4 @@
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { DataService } from '../../../services/data.service';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonComponent } from '../../atoms/button/button.component';
 import { CommonModule } from '@angular/common';
@@ -9,6 +8,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogClose, MatDialogRef } from '@angul
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SocialMediaLinkValidatorDirective } from '../../../directives/social-media-link-validator.directive';
+import { SocialMediaLinkModel } from '../../../models/social-media-link';
 
 @Component({
   selector: 'app-new-link-modal',
@@ -29,11 +29,10 @@ import { SocialMediaLinkValidatorDirective } from '../../../directives/social-me
 })
 export class NewLinkModalComponent {
   newLinkForm: FormGroup;
-  data = inject(MAT_DIALOG_DATA);
+  data: SocialMediaLinkModel = inject(MAT_DIALOG_DATA);
   isUpdateForm: boolean = false;
 
   constructor(
-    private dataService: DataService,
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<NewLinkModalComponent>,
     private cdr: ChangeDetectorRef,
@@ -46,9 +45,9 @@ export class NewLinkModalComponent {
       });
     } else {
       this.newLinkForm = this.fb.group({
-        link: [this.data.link.link, [Validators.required,]],
-        name: [this.data.link.name, Validators.required],
-        desc: [this.data.link.desc, Validators.required]
+        link: [this.data.link, [Validators.required,]],
+        name: [this.data.name, Validators.required],
+        desc: [this.data.desc, Validators.required]
       });
       this.isUpdateForm = true;
     }
@@ -63,15 +62,28 @@ export class NewLinkModalComponent {
 
   onSubmit() {
     if (this.isUpdateForm) {
+      //Edit Form
+      this.data.link = this.newLinkForm.controls['link'].value;
+      this.data.name = this.newLinkForm.controls['name'].value;
+      this.data.desc = this.newLinkForm.controls['desc'].value;
+
       this.dialogRef.close({
         success: true,
-        data: this.newLinkForm.value,
+        isEdit: this.isUpdateForm,
+        data: this.data,
       });
     } else {
-      console.log(this.newLinkForm.value);
-      const res = this.dataService.addNewLink(this.newLinkForm.value);
-      console.log(res.message);
-      this.dialogRef.close();
+      //Add Form
+      console.log({
+        success: true,
+        isEdit: this.isUpdateForm,
+        data: this.newLinkForm.value,
+      });
+      this.dialogRef.close({
+        success: true,
+        isEdit: this.isUpdateForm,
+        data: this.newLinkForm.value,
+      });
     }
   }
 

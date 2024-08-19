@@ -3,9 +3,10 @@
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    margin-top: 16px;
 
     app-button {
-        margin-top: 24px;
+        margin-top: 16px;
     }
 }
 
@@ -16,6 +17,8 @@
 
 .info {
     margin: 4px 0;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 .link-container {
@@ -23,4 +26,10 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
+
+    p,
+    app-link {
+        margin: 0;
+        font-size: 12px;
+    }
 }

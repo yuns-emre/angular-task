@@ -21,7 +21,9 @@ export class SocialMediaLinkValidatorDirective {
       /^(https?:\/\/)?(www\.)?facebook\.com\/[a-zA-Z0-9(\.\?)?]/,
       /^(https?:\/\/)?(www\.)?twitter\.com\/[a-zA-Z0-9(\.\?)?]/,
       /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9(\.\?)?]/,
-      /^(https?:\/\/)?(www\.)?linkedin\.com\/[a-zA-Z0-9(\.\?)?]/,
+      /^(https?:\/\/)?(www\.)?(tr\.)?linkedin\.com\/[a-zA-Z0-9(\.\?)?]/,
+      /^(https?:\/\/)?(www\.)?behance\.net\/[a-zA-Z0-9(\.\?)?]/,
+
     ];
 
     const isValid = socialMediaPatterns.some(pattern => pattern.test(value));

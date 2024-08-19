@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   template: `
     <div class="search-container">
       <app-input type="text" placeholder="Search objects..." [className]="'search-input'" [isChangeControl]="true" (changeValue)="setText($event)"  ></app-input>
-      <app-atom-btn-with-icon type="button" className="search-btn" (callFunction)="search()"  icon="/assets/icons/search-icon.svg" [isWithIcon]="true"></app-atom-btn-with-icon>
+      <app-atom-btn-with-icon type="button" className="search-btn" (callFunction)="search()"  icon="search" [isWithIcon]="true"></app-atom-btn-with-icon>
     <div>
   `,
   styles: `
@@ -26,7 +26,9 @@ import { CommonModule } from '@angular/common';
       }
 
       app-input{
-        width:100%
+        width:100%;
+        overflow: hidden;
+        border-radius: 32px 0 0 32px !important;
       }
     }
     

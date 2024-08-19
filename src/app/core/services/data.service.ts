@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from './local-storage.service';
 import { SocialMediaLinkModel } from '../models/social-media-link';
 import { ResponseModel } from '../models/response';
+import { collection, deleteDoc, doc, Firestore, getDoc, getDocs, query, setDoc, updateDoc, where } from '@angular/fire/firestore';
+import { UserService } from './user.service';
+import { from, map } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
+import { addDoc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +13,8 @@ import { ResponseModel } from '../models/response';
 export class DataService {
 
   constructor(
+    private firestore: Firestore,
+    private userService: UserService,
     private localStorage: LocalStorageService,
   ) { }
 
@@ -54,30 +60,6 @@ export class DataService {
     },
   ];
 
-  userSocialMediaLink = [
-    {
-      uid: "yunus@gmail.com",
-      socialMedia: [
-        {
-          name: "Instagram",
-          desc: "We'll help you to finish your development project successfully.",
-          link: "instagram.com/mobilerast/",
-        },
-        {
-          name: "linkedin",
-          desc: "Hire vetted developers from Rast Mobile to scale up your tech projects.",
-          link: "tr.linkedin.com/company/rastmobile",
-        },
-        {
-          name: "Behance",
-          desc: "Software Development Agency Rast Mobile Information Technology Ltd.",
-          link: "behance.net/rastmobile",
-        },
-      ]
-    }
-  ];
-
-
   getAllHeaderItems() {
     return this.headers;
   }
@@ -86,19 +68,89 @@ export class DataService {
     return this.socialMedia;
   }
 
-  getAllSocialMediaLinks() {
-    const mail = this.localStorage.getItem("mail");
+  async getAllSocialMediaLinks() {
+    try {
+      const uid = this.localStorage.getItem("uid");
 
-    return this.userSocialMediaLink.find(item => item.uid == mail);
+      if (!uid) {
+        throw new Error("User ID is undefined");
+      }
+
+      // Sosyal medya linkleri koleksiyon referansı
+      const linksCollection = collection(this.firestore, 'social-media-links');
+
+      // UID'ye göre filtreleme
+      const q = query(linksCollection, where('uid', '==', uid));
+
+      // Belgeleri çekme
+      const querySnapshot = await getDocs(q);
+
+      // Verileri işleme
+      const links: SocialMediaLinkModel[] = [];
+      querySnapshot.forEach(doc => {
+        const data = {
+          id: doc.id,
+          ...doc.data(),
+        }
+        links.push(data as SocialMediaLinkModel);
+      });
+      console.log("links:", links);
+      return links;
+    } catch (error) {
+      console.error("Error getting documents: ", error);
+      return [];
+    }
   }
 
-  addNewLink(data: SocialMediaLinkModel) {
-    const model = new ResponseModel();
-    const mail = this.localStorage.getItem("mail");
-    this.userSocialMediaLink.find(item => item.uid == mail)?.socialMedia.push(data);
+  async addNewLink(linkData: SocialMediaLinkModel): Promise<void> {
+    try {
+      const uid = this.localStorage.getItem("uid") ?? '';
+      if (!uid) {
+        console.error("UID is missing");
+        return;
+      }
 
-    model.message = "İşleminiz Başarıyla Tamamlanmıştır...";
-    model.success = true;
-    return model;
+      linkData.uid = uid;
+
+      const docRef = await addDoc(collection(this.firestore, 'social-media-links'), linkData);
+
+      console.log('Document written with ID:', docRef.id);
+    } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  }
+
+  async deleteSocialMediaLink(id: string): Promise<void> {
+    try {
+      if (id == undefined || id == null || id == '') {
+        return;
+      }
+      const docRef = doc(this.firestore, 'social-media-links', id);
+      await deleteDoc(docRef);
+      console.log('Document successfully deleted!');
+    } catch (error) {
+      console.error("Error deleting document: ", error);
+    }
+  }
+
+  // Sosyal medya linkini güncelleme
+  async updateSocialMediaLink(id: string, updatedData: Partial<SocialMediaLinkModel>): Promise<void> {
+    try {
+      const uid = this.localStorage.getItem("uid") ?? '';
+      if (!uid || !id) {
+        console.error("UID or document ID is missing");
+        return;
+      }
+
+      // Belirli bir id'ye sahip belgeyi hedefleyen referans oluştur
+      const docRef = doc(this.firestore, 'social-media-links', id);
+
+      // Belgeyi güncelle
+      await updateDoc(docRef, updatedData);
+
+      console.log('Document successfully updated!');
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
   }
 }

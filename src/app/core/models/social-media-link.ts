@@ -1,5 +1,7 @@
-export class SocialMediaLinkModel {
-    link: string = "";
-    name: string = "";
-    desc: string = "";
+export interface SocialMediaLinkModel {
+    id?: string;
+    uid: string;
+    link: string;
+    name: string;
+    desc: string;
 }

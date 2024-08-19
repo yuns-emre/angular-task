@@ -7,7 +7,7 @@
         [control]="loginForm.controls['password']"></app-form-group>
     <app-button label="Login"></app-button>
     <div class="link-container">
-        <p>Don't have an account?</p>
-        <app-link route="/auth/register">Register</app-link>
+        <p>Bir hesabın yok mu?</p>
+        <app-link route="/auth/register" [text]="'Kayıt Ol'">Register</app-link>
     </div>
 </form>

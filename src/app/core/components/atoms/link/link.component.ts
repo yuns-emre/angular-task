@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   template: `
-    <ng-container *ngIf='this.route.indexOf("https://") == 0 ;else other'>
+    <ng-container *ngIf='this.route.indexOf("https://") == 0;else other'>
       <a  [href]="route" target="_blank"  [ngClass]="className">
         {{text}}
       </a>

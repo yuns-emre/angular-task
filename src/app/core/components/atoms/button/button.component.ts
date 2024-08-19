@@ -9,7 +9,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     <button [type]="type"  [ngStyle]="{'width': isExpanded ? '100%' : ''}" [ngClass]="className" [class]="className">{{ label }}</button>
   `,
   styles: `
-
     .modal-save-btn{
       background: rgba(116, 75, 252, 1);
       border-radius: 32px;
@@ -34,6 +33,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() label: string = 'Submit';
   @Input() type: string = 'submit';
-  @Input() className: string = '';
+  @Input() className: string = 'primary-btn';
   @Input() isExpanded: boolean = false;
 }

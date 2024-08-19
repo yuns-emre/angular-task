@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,6 +7,7 @@ import { Sort, MatSortModule } from '@angular/material/sort';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { NewLinkModalComponent } from '../new-link-modal/new-link-modal.component';
 import { CapitalizePipe } from '../../../pipe/capitalize.pipe';
+import { SocialMediaLinkModel } from '../../../models/social-media-link';
 
 @Component({
   selector: 'app-data-table',
@@ -26,9 +27,9 @@ export class DataTableComponent implements OnInit {
   @Input() titles: string[] = [];
   @Input() tableData: any[] = [];
   @Input() className: string = "";
+  @Output() callback = new EventEmitter<{ message: "edit" | "delete" | "reupload", data: {} }>
 
-  emptyData = Array(10 - this.tableData.length).fill(null);
-
+  emptyData: any[] = [];
   sortedData: any[] = [];
 
   constructor(private dialog: MatDialog) {
@@ -36,6 +37,8 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.sortedData = this.tableData;
+    this.emptyData = Array(10 - this.sortedData.length).fill(null);
+    console.log("sortedData", this.sortedData);
   }
 
   sortData(sort: Sort) {
@@ -62,32 +65,30 @@ export class DataTableComponent implements OnInit {
     console.log(this.sortedData);
   }
 
-  edit(value: any) {
+  edit(value: SocialMediaLinkModel) {
+    console.log("Value For Edit:", value);
     const dialogRef = this.dialog.open(NewLinkModalComponent, {
-      data: {
-        link: value,
-      },
+      data: value,
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('Dialog result Edit:', result);
-
       if (result.success == true) {
-        const index: number = this.tableData.indexOf(value);
-        if (index !== -1) {
-          this.tableData.splice(index, 1);
-          this.tableData.splice(index, 0, result.data);
-        }
+        value.link = result.data.link;
+        value.desc = result.data.desc;
+        value.name = result.data.name;
+
+        this.callback.emit({ message: "edit", data: result.data });
       }
     });
   }
 
-  remove(value: any) {
+  remove(value: SocialMediaLinkModel) {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       data: {
         text: value.name,
       },
-      height: '200px',
+      height: '220px',
       width: '400px',
     });
 
@@ -95,10 +96,7 @@ export class DataTableComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
 
       if (result == true) {
-        const index: number = this.tableData.indexOf(value);
-        if (index !== -1) {
-          this.tableData.splice(index, 1);
-        }
+        this.callback.emit({ message: "delete", data: value })
       }
     });
   }

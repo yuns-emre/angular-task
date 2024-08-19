@@ -5,6 +5,7 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 import { NewLinkModalComponent } from '../new-link-modal/new-link-modal.component';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-table-header',
@@ -15,14 +16,24 @@ import { NewLinkModalComponent } from '../new-link-modal/new-link-modal.componen
 })
 export class TableHeaderComponent {
   @Output() callbackhome = new EventEmitter();
-  readonly dialog = inject(MatDialog);
+  @Output() addNewLink = new EventEmitter();
 
   constructor(
+    private dialog: MatDialog,
+    private dataService: DataService,
   ) { }
 
   newLink() {
     console.log("new link");
-    this.dialog.open(NewLinkModalComponent);
+    const dialogRef = this.dialog.open(NewLinkModalComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result.success && result.isEdit == false) {
+        this.dataService.addNewLink(result.data);
+        this.addNewLink.emit();
+      }
+    });
+
   }
 
   callback(args: any) {

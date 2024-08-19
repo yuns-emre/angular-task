@@ -4,6 +4,8 @@ import { ButtonComponent } from "../../atoms/button/button.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TextBtnComponent } from "../../atoms/link/link.component";
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-form',
@@ -15,17 +17,28 @@ import { TextBtnComponent } from "../../atoms/link/link.component";
 export class RegisterFormComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router,
+  ) {
     this.registerForm = this.fb.group({
+      name: ['', [Validators.required,]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required]
     });
   }
 
-  onSubmit() {
+  async onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      try {
+        const { email, password, confirmPassword, name } = this.registerForm.value;
+        await this.authService.register(email, password, confirmPassword, name);
+        this.router.navigate(['auth/login']);
+      } catch (error) {
+        console.error('Registration Error:', error);
+      }
     }
   }
 }

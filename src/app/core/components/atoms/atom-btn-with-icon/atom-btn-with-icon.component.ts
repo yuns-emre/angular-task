@@ -1,20 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-atom-btn-with-icon',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   template: `
     <button [type]="type" [class]="className" (click)="send()" >
       {{name}}
 
       <ng-container *ngIf="isWithIcon">
-        <img [src]="icon"/>
+        <mat-icon [fontIcon]="icon"></mat-icon>
       </ng-container> 
     </button>
   `,
   styles: `
+    button{
+      cursor:pointer;
+    }
     .search-btn{
       background: rgb(116, 75, 252);
       border:none;
@@ -24,6 +28,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       display: flex;
       justify-content: center;
       align-items: center;
+
+      mat-icon{
+        color:white !important;
+      }
     }
 
     .search-btn:hover{
@@ -40,9 +48,31 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       align-items: center;
       flex-direction: row-reverse;
       gap: 12px;
+      min-height: 0 !important; 
+      min-width: 0 !important;
 
-      img{
+      mat-icon{
         color:white !important;
+      }
+    }
+
+    .logout-btn{
+      color: #ff7a7a;
+      border: none;
+      border-radius: 32px;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: center;
+      align-items: center;
+      margin-left: 16px;
+      padding: 8px 16px;
+      gap: 4px;
+
+      mat-icon{
+        font-size:18px;
+        width:18px;
+        height:18px;
       }
     }
   `
